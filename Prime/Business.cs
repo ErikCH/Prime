@@ -18,7 +18,7 @@ namespace Prime
         Stack stack;
         private static string PRIME_EMPTY = " is a Prime Number!";
         private static string PRIME_ONE = "Please pick a number larger than 1!";
-        private static string PRIME_FACTOR_TEXT = "List of Prime Factors\n";
+        private static string PRIME_FACTOR_TEXT = "List of Prime Factors for ";
         private static long FIRST_FACTOR_TEST = 2;
         private static long SECOND_FACTOR_TEST = 3;
         private long num;
@@ -31,25 +31,27 @@ namespace Prime
 
         }
 
+        //this method finds factors
         public string factor()
         {
-            if (num != FIRST_FACTOR_TEST)
+            long temp = num;
+            if (temp != FIRST_FACTOR_TEST)
             {
-                while (num % FIRST_FACTOR_TEST == 0)
+                while (temp % FIRST_FACTOR_TEST == 0)
                 {
                     stack.Push(FIRST_FACTOR_TEST);
-                    num /= FIRST_FACTOR_TEST;
+                    temp /= FIRST_FACTOR_TEST;
                 }
             }
 
             long factorNum = SECOND_FACTOR_TEST;
-            while (factorNum * factorNum <= num)
+            while (factorNum * factorNum <= temp)
             {
-                if (num % factorNum == 0)
+                if (temp % factorNum == 0)
                 {
                     // This is a factor.
                     stack.Push(factorNum);
-                    num /= factorNum;
+                    temp /= factorNum;
                 }
                 else
                 {
@@ -60,12 +62,14 @@ namespace Prime
 
             // If num is not 1, then whatever is left is prime.
             
-            if (num > 1) stack.Push(num);
+            if (temp > 1) stack.Push(temp);
 
 
             return print();
         }
 
+
+        // returns string that displays factors
         public string print()
         {
             string temp ="";
@@ -74,7 +78,7 @@ namespace Prime
             if (stack.Count == 1)
                 return num.ToString() + PRIME_EMPTY;
             else
-                temp = PRIME_FACTOR_TEXT;
+                temp = PRIME_FACTOR_TEXT + num + "\n";
                 foreach (var element in stack)
                     temp += element + "\n";
             
