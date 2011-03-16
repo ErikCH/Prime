@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business.cs" />
     <Compile Include="PrimeMain.cs">
       <SubType>Form</SubType>
     </Compile>
